@@ -1,0 +1,179 @@
+{
+    "pipeline": {
+        "name": "webapp1",
+        "roleArn": "arn:aws:iam::705791504920:role/service-role/AWSCodePipelineServiceRole-eu-west-2-webapp1",
+        "artifactStore": {
+            "type": "S3",
+            "location": "codepipeline-eu-west-2-506473959341"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "AWS",
+                            "provider": "CodeCommit",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "BranchName": "main",
+                            "OutputArtifactFormat": "CODE_ZIP",
+                            "PollForSourceChanges": "false",
+                            "RepositoryName": "webapp"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [],
+                        "region": "eu-west-2",
+                        "namespace": "SourceVariables"
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "Build",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "BatchEnabled": "false",
+                            "ProjectName": "webapp"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "OutputArti"
+                            }
+                        ],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "eu-west-2"
+                    }
+                ]
+            },
+            {
+                "name": "Approval",
+                "actions": [
+                    {
+                        "name": "Approval",
+                        "actionTypeId": {
+                            "category": "Approval",
+                            "owner": "AWS",
+                            "provider": "Manual",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "CustomData": "Please validate the build"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [],
+                        "region": "eu-west-2"
+                    },
+                    {
+                        "name": "SecondApproval",
+                        "actionTypeId": {
+                            "category": "Approval",
+                            "owner": "AWS",
+                            "provider": "Manual",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "CustomData": "Please verify build"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [],
+                        "region": "eu-west-2"
+                    }
+                ]
+            },
+            {
+                "name": "Deploy",
+                "actions": [
+                    {
+                        "name": "Deploy",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "CodeDeploy",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "ApplicationName": "webapp",
+                            "DeploymentGroupName": "codedeploy-group"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "eu-west-2",
+                        "namespace": "DeployVariables"
+                    },
+                    {
+                        "name": "Output",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "S3",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "BucketName": "webapp-output-bucket1",
+                            "Extract": "false",
+                            "ObjectKey": "Output.zip"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "eu-west-2"
+                    },
+                    {
+                        "name": "ManualValidation",
+                        "actionTypeId": {
+                            "category": "Approval",
+                            "owner": "AWS",
+                            "provider": "Manual",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "CustomData": "verify validation"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [],
+                        "region": "eu-west-2"
+                    }
+                ]
+            }
+        ],
+        "version": 6
+    },
+    "metadata": {
+        "pipelineArn": "arn:aws:codepipeline:eu-west-2:705791504920:webapp1",
+        "created": "2023-12-18T17:02:28.632000+00:00",
+        "updated": "2023-12-18T21:27:19.142000+00:00"
+    }
+}

@@ -1,0 +1,22 @@
+version: 0.2
+
+phases: 
+    install:
+        commands:
+            - echo Entered the install block...
+            - apt-get update -y 
+            - apt-get install -y curl 
+    pre_build:
+        commands: 
+            - echo Entered the pre_build block...
+    build:
+        commands:
+            - echo Entered the build block...
+            - echo build started on `date`
+    post_build:
+        commands:
+            - echo Entered the post_build block...
+            - echo build completed on `date`
+artifacts:
+    files:
+        - index.html
