@@ -4,13 +4,15 @@
 
 ## Run these comands after ssh to the ec2 instances
 [ec2-user@ip-172-31-8-194 ~]$ history
-    1  sudo yum update -y
-    2  sudo yum install ruby -y wget
-    3  pwd
-    4  wget https://aws-codedeploy-eu-west-2.s3.eu-west-2.amazonaws.com/latest/install
-    5  ls
-    6  chmod +x ./install
-    7  sudo ./install auto
-    8  clear
-    9  sudo service codedeploy-agent status
-   10  history
+    sudo yum update -y
+    sudo yum install ruby -y wget
+    wget https://aws-codedeploy-eu-west-2.s3.eu-west-2.amazonaws.com/latest/install
+    chmod +x ./install
+    sudo ./install auto
+   
+    sudo service codedeploy-agent status
+
+#  COdepipeline
+
+ aws codepipeline get-pipeline --name webapp > pipeline.jason
+  
