@@ -1,0 +1,30 @@
+aws deploy delete-deployment-group \
+     --application-name ecsApp \
+     --deployment-group-name  ecsDG \
+     --region eu-west-2
+
+aws deploy delete-application \
+     --application-name ecsApp \
+     --region eu-west-2
+
+aws ecs delete-service \
+     --cluster ecsCluster \
+     --service <service ARN> \
+     --force \
+     --region eu-west-2
+
+aws ecs delete-cluster \
+     --cluster ecsCluster \
+     --region eu-west-2
+
+aws elbv2 delete-load-balancer \
+     --load-balancer-arn <load balancer ARN> \
+     --region eu-west-2
+
+aws elbv2 delete-target-group \
+     --target-group-arn <ecsTarget1 ARN> \
+     --region eu-west-2
+
+aws elbv2 delete-target-group \
+     --target-group-arn <ecsTarget2 ARN> \
+     --region eu-west-2

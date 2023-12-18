@@ -1,0 +1,87 @@
+1. Create an ALB that has at least 2 subnets in different AZs and a security group
+aws elbv2 create-load-balancer \
+--name ecsALB \
+--subnets <your default subnet1> <your default subnet2> \
+--security-groups <your default security group> \
+--region eu-west-2
+
+ARN of loadbalancer:
+"LoadBalancerArn": "<load balancer ARN>"
+
+-----------------------------------------------------------------------------
+2. Create the first target group
+aws elbv2 create-target-group \
+--name ecsTarget1 \
+--protocol HTTP \
+--port 80 \
+--target-type ip \
+--vpc-id "<your defaul vpc>" \
+--region eu-west-2
+
+ARN of target group:
+"TargetGroupArn": "<ecsTarget1 ARN>"
+
+-----------------------------------------------------------------------------
+3. Create the second target group
+aws elbv2 create-target-group \
+--name ecsTarget2 \
+--protocol HTTP \
+--port 80 \
+--target-type ip \
+--vpc-id "<your default vpc>" \
+--region eu-west-2
+
+ARN of target group:
+"TargetGroupArn": "<ecsTarget2 ARN"
+
+-----------------------------------------------------------------------------
+4. Create a listener with a default rule forwarding production traffic to port 80 
+aws elbv2 create-listener \
+--load-balancer-arn <load balancer ARN> \
+--protocol HTTP \
+--port 80 \
+--default-actions Type=forward,TargetGroupArn=<ecsTarget1 ARN> \
+--region eu-west-2
+
+ARN of listener:
+"ListenerArn": "<listener ARN>"
+
+-----------------------------------------------------------------------------
+5. Create an Amazon ECS cluster
+aws ecs create-cluster \
+     --cluster-name ecsCluster \
+     --region eu-west-2
+
+ARN for the cluster:
+"clusterArn": "<cluster ARN>"
+
+-----------------------------------------------------------------------------
+6. Register a task definition compatible with Fargate. It requires the use of the awsvpc network mode.
+aws ecs register-task-definition \
+     --cli-input-json file://fargateTask.json \
+     --region eu-west-2
+
+ARN for the task definition:
+"taskDefinitionArn": "<task def ARN>"
+
+-----------------------------------------------------------------------------
+7. Create an Amazon ECS service
+aws ecs create-service \
+     --cli-input-json file://ecsService.json \
+     --region eu-west-2
+
+ARN of service:
+ "serviceArn": "<service ARN>"
+
+-----------------------------------------------------------------------------
+8. Create a CodeDeploy application
+aws deploy create-application \
+     --application-name ecsApp \
+     --compute-platform ECS \
+     --region eu-west-2
+
+-----------------------------------------------------------------------------
+9. Create a CodeDeploy deployment group
+aws deploy create-deployment-group \
+     --cli-input-json file://ecsDG.json \
+     --region eu-west-2

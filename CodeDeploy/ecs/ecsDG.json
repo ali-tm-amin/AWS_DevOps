@@ -1,0 +1,48 @@
+{
+    "applicationName": "ecsApp",
+    "autoRollbackConfiguration": {
+       "enabled": true,
+       "events": [ "DEPLOYMENT_FAILURE" ]
+    },
+    "blueGreenDeploymentConfiguration": {
+       "deploymentReadyOption": {
+          "actionOnTimeout": "CONTINUE_DEPLOYMENT",
+          "waitTimeInMinutes": 0
+       },
+       "terminateBlueInstancesOnDeploymentSuccess": {
+          "action": "TERMINATE",
+          "terminationWaitTimeInMinutes": 1
+       }
+    },
+    "deploymentGroupName": "ecsDG",
+    "deploymentStyle": {
+       "deploymentOption": "WITH_TRAFFIC_CONTROL",
+       "deploymentType": "BLUE_GREEN"
+    },
+    "loadBalancerInfo": {
+       "targetGroupPairInfoList": [
+         {
+           "targetGroups": [
+              {
+                  "name": "ecsTarget1"
+              },
+              {
+                  "name": "ecsTarget2"
+              }
+           ],
+           "prodTrafficRoute": {
+               "listenerArns": [
+                   "<listener ARN>"
+               ]
+           }
+         }
+       ]
+    },
+    "serviceRoleArn": "arn:aws:iam::<your account id>:role/ECS-Deploy-Role",
+    "ecsServices": [
+        {
+            "serviceName": "ecsService",
+            "clusterName": "ecsCluster"
+        }
+    ]
+ }

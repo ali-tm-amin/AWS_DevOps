@@ -1,0 +1,26 @@
+{
+    "cluster": "ecsCluster",
+    "serviceName": "ecsService",
+    "taskDefinition": "ecsTaskDef",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "<ecsTarget1 ARN>",
+            "containerName": "sample-app",
+            "containerPort": 80
+        }
+    ],
+    "launchType": "FARGATE",
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "CODE_DEPLOY"
+    },
+    "platformVersion": "LATEST",
+    "networkConfiguration": {
+       "awsvpcConfiguration": {
+          "assignPublicIp": "ENABLED",
+          "securityGroups": [ "<your default security group>" ],
+          "subnets": [ "<default subnet 1>" , "<default subnet 2>" ]
+       }
+    },
+    "desiredCount": 1
+}
