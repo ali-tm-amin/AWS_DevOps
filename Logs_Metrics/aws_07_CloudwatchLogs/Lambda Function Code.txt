@@ -1,0 +1,9 @@
+var zlib - require('zlib');
+
+exports.handler = function(input, context) {
+	var zippedData = Buffer.from(input.awslogs.data, 'base64');
+	zlib.gunzip(zippedData, function(e, result) {
+		console.log("Data:", JSON.stringify(JSON.parse(result.toString())));
+		context.succeed();
+	});
+};

@@ -1,0 +1,3 @@
+aws logs put-log-events --log-group-name <log group name> --log-stream-name <log stream name> --log-events "[{\"timestamp\":<epoch time in milliseconds>, \"message\":\"<Your log message>\"}]" --sequence-token <sequence token>
+
+NOTE: Sequence token is not necessary for first put log event call. Subsequent calls need to specify the sequence token returned by the previous call.
