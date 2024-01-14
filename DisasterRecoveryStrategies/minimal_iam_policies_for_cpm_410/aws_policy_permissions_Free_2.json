@@ -1,0 +1,49 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "FSX",
+      "Action": [
+        "ds:DescribeDirectories",
+        "fsx:CreateBackup",
+        "fsx:CreateFileSystem",
+        "fsx:CreateFileSystemFromBackup",
+        "fsx:CreateStorageVirtualMachine",
+        "fsx:CreateVolumeFromBackup",
+        "fsx:DeleteBackup",
+        "fsx:DescribeBackups",
+        "fsx:DescribeFileSystems",
+        "fsx:DescribeStorageVirtualMachines",
+        "fsx:DescribeVolumes",
+        "fsx:ListTagsForResource",
+        "fsx:TagResource"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "CBT",
+      "Action": [
+        "ebs:ListChangedBlocks",
+        "ebs:ListSnapshotBlocks"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "FLR",
+      "Action": [
+        "ebs:ListSnapshotBlocks",
+        "ebs:GetSnapshotBlock"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}

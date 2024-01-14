@@ -1,0 +1,9 @@
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<h2>Apache service started on $(hostname -f)</h2>" > /var/www/html/index.html
+echo "<h2>Healthy instance</h2>" > /var/www/html/health.html
+
+# Note that this is user data script is valid for Amazon Linux 2 EC2 instances

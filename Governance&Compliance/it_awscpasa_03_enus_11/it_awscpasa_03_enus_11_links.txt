@@ -1,0 +1,1 @@
+https://awsdocs.s3.amazonaws.com/servicecatalog/development-environment.template

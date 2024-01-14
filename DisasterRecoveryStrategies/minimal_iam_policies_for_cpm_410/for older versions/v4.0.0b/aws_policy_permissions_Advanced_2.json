@@ -1,0 +1,168 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CopyToS3",
+      "Action": [
+        "s3:ReplicateObject",
+        "s3:ListAllMyBuckets",
+        "s3:AbortMultipartUpload",
+        "s3:ListBucket",
+        "s3:ListMultipartUploadParts",
+        "s3:GetBucketLocation",
+        "s3:ListMultipartUploadParts",
+        "s3:GetEncryptionConfiguration",
+        "s3:PutObject*",
+        "s3:GetObject*",
+        "s3:DeleteObject*",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "ebs:ListChangedBlocks",
+        "ebs:ListSnapshotBlocks",
+        "ebs:GetSnapshotBlock",
+        "rds:StartExportTask",
+        "rds:DescribeExportTasks",
+        "rds:CancelExportTask"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "CPMWorkerTermination",
+      "Action": "ec2:TerminateInstances",
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/Name": "CPMWorkerMachine"
+        }
+      }
+    },
+    {
+      "Sid": "ResourceControl",
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "rds:StartDBInstance",
+        "rds:StopDBInstance"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "EFS",
+      "Action": [
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeTags",
+        "elasticfilesystem:CreateTags",
+        "elasticfilesystem:DescribeLifecycleConfiguration",
+        "elasticfilesystem:PutLifecycleConfiguration",
+        "elasticfilesystem:UpdateFileSystem",
+        "backup:StartBackupJob",
+        "backup:DescribeBackupJob",
+        "backup:ListBackupJobs",
+        "backup:ListBackupVaults",
+        "backup:GetRecoveryPointRestoreMetadata",
+        "backup:ListTags",
+        "backup:StartRestoreJob",
+        "backup:DescribeRestoreJob",
+        "backup:ListRestoreJobs",
+        "backup:DeleteRecoveryPoint",
+        "backup:DescribeRecoveryPoint",
+        "backup:UpdateRecoveryPointLifecycle",
+        "backup:StartCopyJob",
+        "backup:DescribeCopyJob",
+        "iam:ListRoles"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "CostExplorer",
+      "Action": [
+        "pricing:GetProducts",
+        "ec2:GetConsoleOutput",
+        "ce:GetCostAndUsage"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "SupportedServiceRegions",
+      "Action": [
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "S3Sync",
+      "Action": [
+        "s3:DeleteObject",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:GetObjectTagging",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "s3:PutObjectAcl",
+        "s3:PutObjectTagging"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "FSX",
+      "Action": [
+        "ds:DescribeDirectories",
+        "fsx:CreateBackup",
+        "fsx:CreateFileSystemFromBackup",
+        "fsx:DeleteBackup",
+        "fsx:DescribeBackups",
+        "fsx:DescribeFileSystems",
+        "fsx:ListTagsForResource",
+        "fsx:TagResource"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "CBT",
+      "Action": [
+        "ebs:ListChangedBlocks",
+        "ebs:ListSnapshotBlocks"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "FLR",
+      "Action": [
+        "ebs:ListSnapshotBlocks",
+        "ebs:GetSnapshotBlock"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}

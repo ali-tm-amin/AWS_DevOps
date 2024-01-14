@@ -1,0 +1,6 @@
+exports.handler = function(event, context) {
+    event.Records.forEach(function(record) {
+        var input = Buffer.from(record.kinesis.data, 'base64').toString('ascii');
+        console.log('Kinesis Stream content: ', input);
+    });
+};

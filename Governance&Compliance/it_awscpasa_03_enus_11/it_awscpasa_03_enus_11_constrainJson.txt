@@ -1,0 +1,22 @@
+{
+   "Rules":{
+      "Rule1":{
+         "Assertions":[
+            {
+               "Assert":{
+                  "Fn::Contains":[
+                     [
+                        "t2.micro",
+                        "m3.medium"
+                     ],
+                     {
+                        "Ref":"InstanceType"
+                     }
+                  ]
+               },
+               "AssertDescription":"Instance type should be either t2.micro or m3.medium"
+            }
+         ]
+      }
+   }
+}

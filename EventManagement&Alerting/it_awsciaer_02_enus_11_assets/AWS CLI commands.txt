@@ -1,0 +1,1 @@
+aws kinesis put-record --stream-name demo-stream --partition-key 1 --data "SGVsbG8gd29ybGQh"

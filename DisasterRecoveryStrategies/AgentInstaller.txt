@@ -1,0 +1,14 @@
+NOTE: The Agent installer location format:
+https://aws-elastic-disaster-recovery-<REGION>.s3.amazonaws.com/latest/linux/aws-replication-installer-init.py
+# Replace <REGION> with the AWS Region you are replicating into.
+
+1. Full wget command for us-east-2:
+wget -O ./aws-replication-installer-init.py \
+https://aws-elastic-disaster-recovery-us-east-2.s3.amazonaws.com/latest/linux/aws-replication-installer-init.py
+
+
+2. Install command
+sudo python3 aws-replication-installer-init.py \
+--region us-east-2 \
+--aws-access-key-id <your access key id> \
+--aws-secret-access-key <your secret access key>

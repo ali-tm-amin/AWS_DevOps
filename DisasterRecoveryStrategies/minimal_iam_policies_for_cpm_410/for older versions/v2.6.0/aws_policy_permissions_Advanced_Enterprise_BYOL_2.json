@@ -1,0 +1,43 @@
+{
+  "Version": "2012-10-17", 
+  "Statement": [
+    {
+      "Sid": "ResourceControl", 
+      "Action": [
+        "ec2:StartInstances", 
+        "ec2:StopInstances", 
+        "rds:StartDBInstance", 
+        "rds:StopDBInstance"
+      ], 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow"
+    }, 
+    {
+      "Sid": "EFS", 
+      "Action": [
+        "elasticfilesystem:DescribeFileSystems", 
+        "elasticfilesystem:DescribeTags", 
+        "elasticfilesystem:CreateTags", 
+        "backup:StartBackupJob", 
+        "backup:DescribeBackupJob", 
+        "backup:ListBackupJobs", 
+        "backup:ListBackupVaults", 
+        "backup:GetRecoveryPointRestoreMetadata", 
+        "backup:ListTags", 
+        "backup:StartRestoreJob", 
+        "backup:DescribeRestoreJob", 
+        "backup:ListRestoreJobs", 
+        "backup:DeleteRecoveryPoint", 
+        "backup:DescribeRecoveryPoint", 
+        "backup:UpdateRecoveryPointLifecycle", 
+        "iam:ListRoles"
+      ], 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow"
+    }
+  ]
+}

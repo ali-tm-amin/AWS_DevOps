@@ -1,0 +1,71 @@
+{
+  "Version": "2012-10-17", 
+  "Statement": [
+    {
+      "Sid": "CPMWorkerTermination", 
+      "Action": "ec2:TerminateInstances", 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow", 
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/Name": "CPMWorkerMachine"
+        }
+      }
+    }, 
+    {
+      "Sid": "ResourceControl", 
+      "Action": [
+        "ec2:StartInstances", 
+        "ec2:StopInstances", 
+        "rds:StartDBInstance", 
+        "rds:StopDBInstance"
+      ], 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow"
+    }, 
+    {
+      "Sid": "EFS", 
+      "Action": [
+        "elasticfilesystem:DescribeFileSystems", 
+        "elasticfilesystem:DescribeTags", 
+        "elasticfilesystem:CreateTags", 
+        "elasticfilesystem:DescribeLifecycleConfiguration", 
+        "elasticfilesystem:PutLifecycleConfiguration", 
+        "elasticfilesystem:UpdateFileSystem", 
+        "backup:StartBackupJob", 
+        "backup:DescribeBackupJob", 
+        "backup:ListBackupJobs", 
+        "backup:ListBackupVaults", 
+        "backup:GetRecoveryPointRestoreMetadata", 
+        "backup:ListTags", 
+        "backup:StartRestoreJob", 
+        "backup:DescribeRestoreJob", 
+        "backup:ListRestoreJobs", 
+        "backup:DeleteRecoveryPoint", 
+        "backup:DescribeRecoveryPoint", 
+        "backup:UpdateRecoveryPointLifecycle", 
+        "iam:ListRoles"
+      ], 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow"
+    }, 
+    {
+      "Sid": "CostExplorer", 
+      "Action": [
+        "pricing:GetProducts", 
+        "ec2:GetConsoleOutput", 
+        "ce:GetCostAndUsage"
+      ], 
+      "Resource": [
+        "*"
+      ], 
+      "Effect": "Allow"
+    }
+  ]
+}

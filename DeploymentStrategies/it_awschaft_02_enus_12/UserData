@@ -1,0 +1,12 @@
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+EC2_AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+EC2_REGION="`echo \"$EC2_AZ\" | sed 's/[a-z]$//'`"
+echo "<h2>Apache service started</h2>" > /var/www/html/index.html
+echo "<h3>$EC2_REGION Region</h3>" >> /var/www/html/index.html
+echo "<h3>$EC2_AZ Availability Zone</h3>" >> /var/www/html/index.html
+
+# Note that this is user data script is valid for Amazon Linux 2 EC2 instances

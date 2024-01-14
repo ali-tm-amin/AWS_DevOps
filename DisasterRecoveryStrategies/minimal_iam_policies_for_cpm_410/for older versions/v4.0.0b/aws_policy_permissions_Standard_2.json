@@ -1,0 +1,84 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EFS",
+      "Action": [
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeTags",
+        "elasticfilesystem:CreateTags",
+        "elasticfilesystem:DescribeLifecycleConfiguration",
+        "elasticfilesystem:PutLifecycleConfiguration",
+        "elasticfilesystem:UpdateFileSystem",
+        "backup:StartBackupJob",
+        "backup:DescribeBackupJob",
+        "backup:ListBackupJobs",
+        "backup:ListBackupVaults",
+        "backup:GetRecoveryPointRestoreMetadata",
+        "backup:ListTags",
+        "backup:StartRestoreJob",
+        "backup:DescribeRestoreJob",
+        "backup:ListRestoreJobs",
+        "backup:DeleteRecoveryPoint",
+        "backup:DescribeRecoveryPoint",
+        "backup:UpdateRecoveryPointLifecycle",
+        "backup:StartCopyJob",
+        "backup:DescribeCopyJob",
+        "iam:ListRoles"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "SupportedServiceRegions",
+      "Action": [
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "FSX",
+      "Action": [
+        "ds:DescribeDirectories",
+        "fsx:CreateBackup",
+        "fsx:CreateFileSystemFromBackup",
+        "fsx:DeleteBackup",
+        "fsx:DescribeBackups",
+        "fsx:DescribeFileSystems",
+        "fsx:ListTagsForResource",
+        "fsx:TagResource"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "CBT",
+      "Action": [
+        "ebs:ListChangedBlocks",
+        "ebs:ListSnapshotBlocks"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Sid": "FLR",
+      "Action": [
+        "ebs:ListSnapshotBlocks",
+        "ebs:GetSnapshotBlock"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}

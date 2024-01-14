@@ -1,0 +1,4 @@
+#!/bin/bash
+yum install -y httpd
+#yum install nodejs -y
+empty_function() {}
